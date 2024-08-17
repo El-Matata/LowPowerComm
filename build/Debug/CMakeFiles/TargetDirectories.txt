@@ -1,0 +1,5 @@
+C:/Users/mahdi/Documents/REPO/GithubRepo/LowPowerComm/build/Debug/CMakeFiles/LowPowerComm.dir
+C:/Users/mahdi/Documents/REPO/GithubRepo/LowPowerComm/build/Debug/CMakeFiles/edit_cache.dir
+C:/Users/mahdi/Documents/REPO/GithubRepo/LowPowerComm/build/Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mahdi/Documents/REPO/GithubRepo/LowPowerComm/build/Debug/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+C:/Users/mahdi/Documents/REPO/GithubRepo/LowPowerComm/build/Debug/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir
