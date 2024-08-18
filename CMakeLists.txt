@@ -49,8 +49,7 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ../../Core/RTTViewer/SEGGER_RTT_printf.c
     ../../Core/RTTViewer/SEGGER_RTT.c
-    ../../Core/RTTViewer/SEGGER_RTT_Syscalls_GCC.c
-    ../../Core/RTTViewer/SEGGER_SYSVIEW.c
+
 
     ../../Core/OLED/display.c
     ../../Core/OLED/ssd1306_fonts.c
