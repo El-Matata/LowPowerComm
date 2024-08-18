@@ -22,6 +22,9 @@
 
 /* USER CODE BEGIN 0 */
 
+  char SendBuffer[128];
+  char ReceiveBuffer[128];
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;
@@ -39,7 +42,7 @@ void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 460800;
+  huart2.Init.BaudRate = 250000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -112,5 +115,29 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+HAL_StatusTypeDef SendMsgSerial(uint8_t *Msg, size_t SizeMsg){
+  size_t sizeMessage = SizeMsg+2;
+  uint8_t message[sizeMessage];
+  sprintf((char*)message,"%s\n\r", Msg);
+  return HAL_UART_Transmit(&huart2, message, sizeMessage, HAL_MAX_DELAY);
+}
+
+size_t ReceiveMsgSerial(void){
+  char ReceiveCharBuffer;
+  char Buffer[128] = "\0";
+
+  HAL_StatusTypeDef status = HAL_OK;
+  size_t size = 0;
+  do{
+    status = HAL_UART_Receive(&huart2, (uint8_t*)(&ReceiveCharBuffer), 1, HAL_MAX_DELAY);
+    size=size+1;
+    sprintf(ReceiveBuffer, "%s%c", Buffer, ReceiveCharBuffer);
+    sprintf(Buffer, "%s",ReceiveBuffer);
+  }while ((ReceiveCharBuffer != (char)'\r') && (status == HAL_OK) && (size < (127)));
+  return size;
+}
+
+
 
 /* USER CODE END 1 */
