@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "string.h": "c",
+        "segger_rtt.h": "c",
+        "segger_rtt_conf.h": "c"
+    }
+}
