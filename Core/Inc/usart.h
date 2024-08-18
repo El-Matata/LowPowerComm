@@ -29,6 +29,8 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
+#include "string.h"
+#include "stdio.h"
 
 /* USER CODE END Includes */
 
@@ -36,11 +38,15 @@ extern UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN Private defines */
 
+extern  char SendBuffer[128];
+extern  char ReceiveBuffer[128];
 /* USER CODE END Private defines */
 
 void MX_USART2_UART_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+HAL_StatusTypeDef SendMsgSerial(uint8_t *Msg, size_t SizeMsg);
+size_t ReceiveMsgSerial(void);
 
 /* USER CODE END Prototypes */
 

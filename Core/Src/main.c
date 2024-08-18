@@ -74,6 +74,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+  char abDataIn[RTT_PRINTF_BUFFER_SIZE];
+  char abDataOut[RTT_PRINTF_BUFFER_SIZE];
+  size_t a=0;
 
   /* USER CODE END 1 */
 
@@ -101,12 +104,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
   SEGGER_RTT_Init();
   SEGGER_RTT_SetTerminal(0);
-  char abDataIn[RTT_PRINTF_BUFFER_SIZE];
-  char abDataOut[RTT_PRINTF_BUFFER_SIZE];
+
   SEGGER_RTT_ConfigDownBuffer(1, "DataIn", &abDataIn[0], sizeof(abDataIn), SEGGER_RTT_MODE_NO_BLOCK_SKIP);
   SEGGER_RTT_ConfigUpBuffer(1, "DataOut", &abDataOut[0], sizeof(abDataOut), SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL);
 
   int NumBytes=0;
+
+  HAL_UART_Init(&huart2);
+
   //RF95_Init();
   /* USER CODE END 2 */
 
@@ -122,16 +127,22 @@ int main(void)
       HAL_GPIO_TogglePin(LED_1_GPIO_Port,LED_1_Pin);
       SEGGER_RTT_printf(0,"%c",NumBytes);
     }*/
-    
+
+
+    a = ReceiveMsgSerial();
+    SendMsgSerial((uint8_t*)ReceiveBuffer,a);
+ 
+    /*
     if(SEGGER_RTT_HasKey()){
       NumBytes = SEGGER_RTT_Read(0, &abDataIn[0], RTT_PRINTF_BUFFER_SIZE);
       SEGGER_RTT_printf(0,"%s",abDataIn);
       memset(abDataIn, '\0', sizeof(abDataIn)); 
-    }
+    }*/ 
+
     //RF95_Master_Receive_from_All_Nodes();
     //RF95_Slave_Send();
-    HAL_GPIO_TogglePin(LED_1_GPIO_Port,LED_1_Pin);
-    HAL_Delay(100);
+    //HAL_GPIO_TogglePin(LED_1_GPIO_Port,LED_1_Pin);
+    //HAL_Delay(100);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
